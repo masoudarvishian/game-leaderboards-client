@@ -14,7 +14,8 @@ export class LeaderboardComponent implements OnInit {
 
   platforms: PlatformDto[];
   leaderboardDto: LeaderboardOutputDto;
-  public pagination: PaginationDto;
+  pagination: PaginationDto;
+  selectedRaceId: Number;
 
   constructor(private leaderboardService: LeaderboardService, private platformService: PlatformService) {
     this.leaderboardDto = new LeaderboardOutputDto();
@@ -50,21 +51,29 @@ export class LeaderboardComponent implements OnInit {
     });
   }
 
-  public onPageChange(pageNum: number): void {
+  onPageChange(pageNum: number): void {
     this.pagination.PageNumber = pageNum;
     this.getLeaderboard();
   }
 
-  public changePagesize(num: number): void {
+  changePagesize(num: number): void {
     console.log('page size changed: ' + num);
   }
 
-  public handlePlatform(event) {
-
+  handlePlatform(event) {
     this.pagination.PlatformId = event.target.value;
-
     this.getLeaderboard();
-    
+  }
+
+  raceIdChange(event) {
+
+    let value = event.target.value;
+
+    if (!value) {
+      value = -1;
+    }
+
+    this.pagination.RaceId = value;
   }
 
 }

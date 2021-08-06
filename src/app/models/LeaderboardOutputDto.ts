@@ -4,6 +4,7 @@ export class DataList {
     Vehicle: string;
     Time: string;
     Platform: string;
+    RaceId: Number;
 }
 
 export class LeaderboardOutputDto {
