@@ -1,0 +1,29 @@
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <div class="card">
+                <h5 class="card-header">REGISTER!</h5>
+                <div class="p-3">
+                    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+                       
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
+                            <input [(ngModel)]="registerModel.Username" name="Username" #Username="ngModel" required type="text"
+                                class="form-control" id="username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="pass" class="form-label">Password <span class="text-danger">*</span></label>
+                            <input [(ngModel)]="registerModel.Password" name="Password" #Password="ngModel" required
+                                type="password" class="form-control" id="pass">
+                        </div>
+                        <button [disabled]="f.invalid" type="submit" class="btn btn-success">Register</button>
+                    </form>
+                    <hr>
+                    <a [routerLink]="['/login']">Already have an account? Sign in here</a>
+                </div>
+            </div>
+
+            <p [hidden]="!errorMsg" class="text-center text-danger mt-3">{{ errorMsg }}</p>
+        </div>
+    </div>
+</div>
