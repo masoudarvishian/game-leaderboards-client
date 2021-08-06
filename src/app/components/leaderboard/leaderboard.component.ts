@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { LeaderboardOutputDto } from 'src/app/models/LeaderboardOutputDto';
 import { PaginationDto } from 'src/app/models/PaginationDto';
+import { PlatformDto } from 'src/app/models/PlatformDto';
 import { LeaderboardService } from 'src/app/services/leaderboard.service';
+import { PlatformService } from 'src/app/services/platform.service';
 
 @Component({
   selector: 'app-leaderboard',
@@ -10,19 +12,22 @@ import { LeaderboardService } from 'src/app/services/leaderboard.service';
 })
 export class LeaderboardComponent implements OnInit {
 
+  platforms: PlatformDto[];
   leaderboardDto: LeaderboardOutputDto;
   public pagination: PaginationDto;
 
-  constructor(private leaderboardService: LeaderboardService) {
+  constructor(private leaderboardService: LeaderboardService, private platformService: PlatformService) {
     this.leaderboardDto = new LeaderboardOutputDto();
     this.pagination = new PaginationDto();
+    this.platforms = [];
   }
 
   ngOnInit() {
-    this.getAll();
+    this.getLeaderboard();
+    this.getPlatforms();
   }
 
-  getAll() {
+  getLeaderboard() {
     this.leaderboardService.getAll(this.pagination).subscribe({
       next: res => {
         this.leaderboardDto = Object.assign(this.leaderboardDto, res);
@@ -33,13 +38,33 @@ export class LeaderboardComponent implements OnInit {
     });
   }
 
+  getPlatforms() {
+    this.platformService.getAll().subscribe({
+      next: res => {
+        this.platforms = Object.assign(this.platforms, res);
+        console.log(this.platforms);
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
+  }
+
   public onPageChange(pageNum: number): void {
     this.pagination.PageNumber = pageNum;
-    this.getAll();
+    this.getLeaderboard();
   }
 
   public changePagesize(num: number): void {
     console.log('page size changed: ' + num);
+  }
+
+  public handlePlatform(event) {
+
+    this.pagination.PlatformId = event.target.value;
+
+    this.getLeaderboard();
+    
   }
 
 }
