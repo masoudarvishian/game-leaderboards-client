@@ -6,15 +6,15 @@ import { LeaderboardService } from 'src/app/services/leaderboard.service';
 @Component({
   selector: 'app-leaderboard',
   templateUrl: './leaderboard.component.html',
-  styleUrls: ['./leaderboard.component.sass']
+  styleUrls: ['./leaderboard.component.scss']
 })
 export class LeaderboardComponent implements OnInit {
 
-  list: LeaderboardOutputDto[];
-  pagination: PaginationDto;
+  leaderboardDto: LeaderboardOutputDto;
+  public pagination: PaginationDto;
 
-  constructor(private leaderboardService: LeaderboardService) { 
-    this.list = [];
+  constructor(private leaderboardService: LeaderboardService) {
+    this.leaderboardDto = new LeaderboardOutputDto();
     this.pagination = new PaginationDto();
   }
 
@@ -25,13 +25,21 @@ export class LeaderboardComponent implements OnInit {
   getAll() {
     this.leaderboardService.getAll(this.pagination).subscribe({
       next: res => {
-        this.list = Object.assign(this.list, res);
-        console.log(this.list);
+        this.leaderboardDto = Object.assign(this.leaderboardDto, res);
       },
       error: err => {
         console.error(err);
       }
     });
+  }
+
+  public onPageChange(pageNum: number): void {
+    this.pagination.PageNumber = pageNum;
+    this.getAll();
+  }
+
+  public changePagesize(num: number): void {
+    console.log('page size changed: ' + num);
   }
 
 }
