@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "codemasters-leaderboards-client": {
+    "game-leaderboards-client": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/codemasters-leaderboards-client",
+            "outputPath": "dist/game-leaderboards-client",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "codemasters-leaderboards-client:build"
+            "browserTarget": "game-leaderboards-client:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "codemasters-leaderboards-client:build:production"
+              "browserTarget": "game-leaderboards-client:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "codemasters-leaderboards-client:build"
+            "browserTarget": "game-leaderboards-client:build"
           }
         },
         "test": {
@@ -110,15 +110,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "codemasters-leaderboards-client:serve"
+            "devServerTarget": "game-leaderboards-client:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "codemasters-leaderboards-client:serve:production"
+              "devServerTarget": "game-leaderboards-client:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "codemasters-leaderboards-client"
+  "defaultProject": "game-leaderboards-client"
 }

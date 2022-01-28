@@ -1,5 +1,5 @@
 {
-  "name": "codemasters-leaderboards-client",
+  "name": "game-leaderboards-client",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
